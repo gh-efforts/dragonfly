@@ -1,13 +1,11 @@
-import * as Vuex from 'vuex';
-import globalModule from './global';
-import createLogger from 'vuex/dist/logger';
+import * as Vuex from 'vuex'
+import modules from './modules'
+import createPersistedState from 'vuex-persistedstate'
 
-const debug = process.env.NODE_ENV !== 'production';
+const debug = process.env.NODE_ENV !== 'production'
 
 export default Vuex.createStore({
-  modules: {
-    global: globalModule
-  },
+  modules,
   strict: debug,
-  plugins: debug ? [createLogger()] : []
-});
+  plugins: [createPersistedState({ storage: window.localStorage })]
+})

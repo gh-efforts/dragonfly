@@ -1,26 +1,32 @@
 <template>
   <div class="container">
-    <main-header @changeSearch="changeSearch" />
-    <main-content :searchTxt='searchTxt' />
+    <main-header @changeSearch="changeSearch"  />
+    <main-tags />
   </div>
 </template>
 
 <script lang="ts">
 import mainHeader from './components/main-header.vue'
-import mainContent from './components/main-content.vue'
-import { ref } from 'vue'
+import mainTags from './components/main-tags.vue'
+import { useRouter } from 'vue-router'
+
 export default {
   components: {
     mainHeader,
-    mainContent
+    mainTags
   },
   setup () {
-    const searchTxt = ref('')
+    const router = useRouter()
+
     const changeSearch = (val: string) => {
-      searchTxt.value = val
+      router.replace({
+        path: '/home',
+        query: {
+          txt: val
+        }
+      })
     }
     return {
-      searchTxt,
       changeSearch
     }
   }

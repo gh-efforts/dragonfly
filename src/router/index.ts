@@ -1,25 +1,24 @@
-import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router';
+import { RouteRecordRaw, createRouter, createWebHistory } from 'vue-router'
+import { defineAsyncComponent } from 'vue'
 
-const loadView = (view: string) => import(/* webpackChunkName: "view-[request]" */ `@/views/${view}.vue`)
-
-// return (resolve: any) => require([/* webpackChunkName: "view-[request]" */ `../views/${view}`], resolve)
+const loadView = (view: string) => defineAsyncComponent(() => import(/* webpackChunkName: "" */ `@/views/${view}.vue`))
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
-    name: 'Home',
-    component: loadView('Home')
+    path: '/images/:id',
+    name: 'tags',
+    component: loadView('Tags')
   },
   {
-    path: '/about',
-    name: 'About',
-    component: loadView('About')
+    path: '/:catchAll(.*)',
+    name: 'home',
+    component: loadView('Home')
   }
-];
+]
 
 const router = createRouter({
   history: createWebHistory(),
   routes
-});
+})
 
-export default router;
+export default router

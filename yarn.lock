@@ -3935,6 +3935,13 @@ escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   resolved "https://registry.npm.taobao.org/escape-string-regexp/download/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
   integrity sha1-G2HAViGQqN/2rjuyzwIAyhMLhtQ=
 
+eslint-config-prettier@^6.12.0:
+  version "6.12.0"
+  resolved "https://registry.npm.taobao.org/eslint-config-prettier/download/eslint-config-prettier-6.12.0.tgz?cache=0&sync_timestamp=1601053003556&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint-config-prettier%2Fdownload%2Feslint-config-prettier-6.12.0.tgz#9eb2bccff727db1c52104f0b49e87ea46605a0d2"
+  integrity sha1-nrK8z/cn2xxSEE8LSeh+pGYFoNI=
+  dependencies:
+    get-stdin "^6.0.0"
+
 eslint-config-standard@^14.1.0:
   version "14.1.1"
   resolved "https://registry.npm.taobao.org/eslint-config-standard/download/eslint-config-standard-14.1.1.tgz?cache=0&sync_timestamp=1584727519567&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint-config-standard%2Fdownload%2Feslint-config-standard-14.1.1.tgz#830a8e44e7aef7de67464979ad06b406026c56ea"
@@ -4020,6 +4027,13 @@ eslint-plugin-node@^11.1.0:
     minimatch "^3.0.4"
     resolve "^1.10.1"
     semver "^6.1.0"
+
+eslint-plugin-prettier@^3.1.4:
+  version "3.1.4"
+  resolved "https://registry.npm.taobao.org/eslint-plugin-prettier/download/eslint-plugin-prettier-3.1.4.tgz#168ab43154e2ea57db992a2cd097c828171f75c2"
+  integrity sha1-Foq0MVTi6lfbmSos0JfIKBcfdcI=
+  dependencies:
+    prettier-linter-helpers "^1.0.0"
 
 eslint-plugin-promise@^4.2.1:
   version "4.2.1"
@@ -4357,6 +4371,11 @@ fast-deep-equal@^3.1.1:
   version "3.1.1"
   resolved "https://registry.npm.taobao.org/fast-deep-equal/download/fast-deep-equal-3.1.1.tgz#545145077c501491e33b15ec408c294376e94ae4"
   integrity sha1-VFFFB3xQFJHjOxXsQIwpQ3bpSuQ=
+
+fast-diff@^1.1.2:
+  version "1.2.0"
+  resolved "https://registry.npm.taobao.org/fast-diff/download/fast-diff-1.2.0.tgz#73ee11982d86caaf7959828d519cfe927fac5f03"
+  integrity sha1-c+4RmC2Gyq95WYKNUZz+kn+sXwM=
 
 fast-glob@^2.2.6:
   version "2.2.7"
@@ -4719,6 +4738,11 @@ get-caller-file@^2.0.1:
   version "2.0.5"
   resolved "https://registry.npm.taobao.org/get-caller-file/download/get-caller-file-2.0.5.tgz#4f94412a82db32f36e3b0b9741f8a97feb031f7e"
   integrity sha1-T5RBKoLbMvNuOwuXQfipf+sDH34=
+
+get-stdin@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.npm.taobao.org/get-stdin/download/get-stdin-6.0.0.tgz#9e09bf712b360ab9225e812048f71fde9c89657b"
+  integrity sha1-ngm/cSs2CrkiXoEgSPcf3pyJZXs=
 
 get-stream@^3.0.0:
   version "3.0.0"
@@ -7417,6 +7441,13 @@ prepend-http@^1.0.0:
   resolved "https://registry.npm.taobao.org/prepend-http/download/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
   integrity sha1-1PRWKwzjaW5BrFLQ4ALlemNdxtw=
 
+prettier-linter-helpers@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npm.taobao.org/prettier-linter-helpers/download/prettier-linter-helpers-1.0.0.tgz#d23d41fe1375646de2d0104d3454a3008802cf7b"
+  integrity sha1-0j1B/hN1ZG3i0BBNNFSjAIgCz3s=
+  dependencies:
+    fast-diff "^1.1.2"
+
 prettier@^1.18.2:
   version "1.19.1"
   resolved "https://registry.npm.taobao.org/prettier/download/prettier-1.19.1.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fprettier%2Fdownload%2Fprettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
@@ -8151,6 +8182,11 @@ shell-quote@^1.6.1:
   version "1.7.2"
   resolved "https://registry.npm.taobao.org/shell-quote/download/shell-quote-1.7.2.tgz#67a7d02c76c9da24f99d20808fcaded0e0e04be2"
   integrity sha1-Z6fQLHbJ2iT5nSCAj8re0ODgS+I=
+
+shvl@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/shvl/download/shvl-2.0.1.tgz?cache=0&sync_timestamp=1596542278321&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fshvl%2Fdownload%2Fshvl-2.0.1.tgz#e49c21b7f223041dd3912c5ce9abf2474b69e680"
+  integrity sha1-5Jwht/IjBB3TkSxc6avyR0tp5oA=
 
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.3"
@@ -9282,10 +9318,18 @@ vue@^3.0.0-0:
     "@vue/runtime-dom" "3.0.0"
     "@vue/shared" "3.0.0"
 
-vuex@^4.0.0-alpha.1:
-  version "4.0.0-beta.1"
-  resolved "https://registry.npm.taobao.org/vuex/download/vuex-4.0.0-beta.1.tgz#4602f1450d45ffa69883dca0d32a5240c1f90d42"
-  integrity sha1-RgLxRQ1F/6aYg9yg0ypSQMH5DUI=
+vuex-persistedstate@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.npm.taobao.org/vuex-persistedstate/download/vuex-persistedstate-3.1.0.tgz?cache=0&sync_timestamp=1596542164857&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fvuex-persistedstate%2Fdownload%2Fvuex-persistedstate-3.1.0.tgz#a710d01000bff8336bc3b03fa3ef42e376094b71"
+  integrity sha1-pxDQEAC/+DNrw7A/o+9C43YJS3E=
+  dependencies:
+    deepmerge "^4.2.2"
+    shvl "^2.0.0"
+
+vuex@^4.0.0-beta.4:
+  version "4.0.0-beta.4"
+  resolved "https://registry.npm.taobao.org/vuex/download/vuex-4.0.0-beta.4.tgz#7b319ead2ef30432b7eaa4e37258ea3c5e44f698"
+  integrity sha1-ezGerS7zBDK36qTjcljqPF5E9pg=
 
 watchpack@^1.6.1:
   version "1.6.1"
