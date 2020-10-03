@@ -1,0 +1,51 @@
+name: Dc-pool-cms-CI/.TENCETN_CLOUD_HOST
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+   # - run: sudo npm config set registry https://registry.npm.taobao.org
+    - name: build
+      run: |
+        sudo echo 'VUE_APP_API_URL=https://dragonflyapi.diancun.net' > .env
+        sudo npm install
+        sudo npm run build
+        sudo ls -alt
+  
+    
+    - name: ssh deploy  
+      uses: easingthemes/ssh-deploy@v2.1.4
+      env:
+    # Private Key  私钥
+        SSH_PRIVATE_KEY: ${{secrets.DC_DRAG}}
+    # Remote host   远程主机
+        REMOTE_HOST: "47.242.38.141"
+    # Remote user  远程主机登录用户
+        REMOTE_USER: "root"
+    # Remote port  远程主机登录端口
+    #   REMOTE_PORT: 22
+    # optional, default is 22
+    # Source directory  源文件 目录
+        SOURCE: "./dist/*"
+    # optional, default is 
+        ARGS: "-rltgoDzvO --delete"
+    # Target directory  目标目录
+        TARGET: "/opt/bin/dragonfly/"
+
+    # optional, default is /home/REMOTE_USER/
+    # Arguments to pass to rsync
+    #ARGS: # optional, default is -rltgoDzvO
