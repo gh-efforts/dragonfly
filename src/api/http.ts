@@ -1,6 +1,6 @@
 import axios from 'axios'
 import queryString from 'query-string'
-import { BASE_URL } from '@/config'
+const BASE_URL = process.env.VUE_APP_API_URL || ''
 
 const message = {
   error (msg: string) {

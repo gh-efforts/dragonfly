@@ -1,13 +1,5 @@
 # Dragonfly
 
-## Project Name and Team Slack Handles
-
-- Project Name: Dragonfly
-- Slack Handle: hexcola
-
-Our team name is Diancun Tech, which is one of miners of Spacerace.
-
-
 ## Brief Project Description
 
 Dragonfly is a distributed docker registry based on Filecoin and IPFS network. The core concept is:
@@ -16,16 +8,17 @@ Dragonfly is a distributed docker registry based on Filecoin and IPFS network. T
 - **Effecient:** low latency and low cost;
 - **Specification:** fully comply with the Docker specification;
 
-## Project Development
+## Build Setup
 
 ```
+echo 'VUE_APP_API_URL=url' > .env
+
+# install dependencies
 yarn install
+
+# serve with hot reload at localhost:8080
 yarn serve
-```
 
-## Project Deployment
-
-```
-yarn install
+# build for production with minification
 yarn build
 ```
