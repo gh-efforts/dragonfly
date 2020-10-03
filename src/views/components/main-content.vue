@@ -42,7 +42,7 @@ export default {
       total: 0,
       limit: 10,
       page: 1,
-      loading: false
+      loading: true
     })
     const domList = ref()
 
