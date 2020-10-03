@@ -16,17 +16,15 @@ Dragonfly is a distributed docker registry based on Filecoin and IPFS network. T
 - **Effecient:** low latency and low cost;
 - **Specification:** fully comply with the Docker specification;
 
-
-
 ## Project Development
- 
+
 ```
 yarn install
 yarn serve
 ```
 
-## Project deployment
- 
+## Project Deployment
+
 ```
 yarn install
 yarn build
