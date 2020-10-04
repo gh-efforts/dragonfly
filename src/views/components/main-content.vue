@@ -56,7 +56,7 @@ export default {
         searchTxt: searchTxt.trim()
       }
       getList(params).then(async (res: any) => {
-        state.list = [...state.list, ...res.rows]
+        state.list = [...state.list, ...res.list]
         state.total = res.count
         state.loading = false
         await nextTick()

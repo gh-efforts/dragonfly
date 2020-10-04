@@ -14,11 +14,11 @@ Dragonfly is a distributed docker registry based on Filecoin and IPFS network. T
 echo 'VUE_APP_API_URL=url' > .env
 
 # install dependencies
-yarn install
+npm install
 
 # serve with hot reload at localhost:8080
-yarn serve
+npm serve
 
 # build for production with minification
-yarn build
+npm run build
 ```
