@@ -42,17 +42,17 @@ export const copyToClipboard = (textToCopy: string): Promise<void> => {
 export const transPower = (data: number) => {
   let size = ''
   if (data < 1 * 1024) {
-    size = data.toFixed(2) + 'B'
+    size = data.toFixed(2) + ' B'
   } else if (data < 1 * 1024 * 1024) {
-    size = (data / 1024).toFixed(2) + 'KiB'
+    size = (data / 1024).toFixed(2) + ' KiB'
   } else if (data < 1 * 1024 * 1024 * 1024) {
-    size = (data / (1024 * 1024)).toFixed(2) + 'MiB'
+    size = (data / (1024 * 1024)).toFixed(2) + ' MiB'
   } else if (data < 1 * 1024 * 1024 * 1024 * 1024) {
-    size = (data / (1024 * 1024 * 1024)).toFixed(2) + 'GiB'
+    size = (data / (1024 * 1024 * 1024)).toFixed(2) + ' GiB'
   } else if (data < 1 * 1024 * 1024 * 1024 * 1024 * 1024) {
-    size = (data / (1024 * 1024 * 1024 * 1024)).toFixed(2) + 'TiB'
+    size = (data / (1024 * 1024 * 1024 * 1024)).toFixed(2) + ' TiB'
   } else {
-    size = (data / (1024 * 1024 * 1024 * 1024 * 1024)).toFixed(2) + 'PiB'
+    size = (data / (1024 * 1024 * 1024 * 1024 * 1024)).toFixed(2) + ' PiB'
   }
   return size
 }

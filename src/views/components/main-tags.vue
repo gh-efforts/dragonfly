@@ -1,55 +1,64 @@
 <template>
   <main class="main-content">
-    <div class="images-names">
-      <img class="images-img" src="@/assets/docker.png" />
-      <div class="ellipsis">
-      {{state.imageName}}
+    <div class="main-header">
+      <div>
+        <div class="main-header-breadcrumb">
+          <router-link to="/">Home</router-link>
+          <a-divider type="vertical" />
+          <router-link to="">{{state.imageName}}</router-link>
+        </div>
       </div>
     </div>
-    <div class="overview">{{state.list.length > 0 ? 1 : 0}} - {{state.list.length}} of {{state.total}} available tags.</div>
-    <div class="list" ref="imageList">
-      <div class="item" v-for="(item,key) of state.list" :key="key">
-        <div class="images-synopsis ellipsis">
-          <div class="ellipsis">{{item.tagName}}</div>
-          <div>Tag</div>
+    <div class="main-header">
+      <div>
+        <div class="images-names">
+          <img class="images-img" src="@/assets/docker.png" />
+          <div class="ellipsis">
+          {{state.imageName}}
+          </div>
         </div>
-        <div class="copyBox">
-          <template v-if="(item.Download || {}).cid">
-            <div class="images-synopsis ellipsis">
+      </div>
+    </div>
+    <div class="main-content-list">
+      <div class="overview">{{state.list.length > 0 ? 1 : 0}} - {{state.list.length}} of {{state.total}} available tags.</div>
+      <div class="list" ref="imageList">
+        <div class="item" v-for="(item,key) of state.list" :key="key">
+          <div class="images-synopsis ellipsis">
+            <div class="ellipsis">{{item.tagName}}</div>
+            <div>Tag</div>
+          </div>
+          <a-tooltip overlayClassName='copy-txt' placement='top' :destroyTooltipOnHide='true'>
+            <template v-slot:title>
+              <span>copy</span>
+            </template>
+            <div class="images-synopsis ellipsis copy-box" @click="copyText((item.Download || {}).cid)">
               <div class="ellipsis">{{(item.Download || {}).cid}}</div>
               <div>CID</div>
             </div>
-            <div class="copyBox-hover">
-              <a-button @click="copyText((item.Download || {}).cid)">
-                Copy
-              </a-button>
+          </a-tooltip>
+          <div class="images-synopsis">
+            <div>{{transPower(item.size)}}</div>
+            <div>Size</div>
+          </div>
+          <a-tooltip overlayClassName='copy-txt' placement='top' :destroyTooltipOnHide='true'>
+            <template v-slot:title>
+              <span>copy</span>
+            </template>
+            <div class="images-synopsis ellipsis copy-box" @click="copyText((item.Download || {}).url)">
+              <div class="ellipsis">{{(item.Download || {}).url}}</div>
+              <div>Pull command</div>
             </div>
-          </template>
+          </a-tooltip>
         </div>
-        <div class="images-synopsis">
-          <div>{{transPower(item.size)}}</div>
-          <div>Size</div>
-        </div>
-        <div class="copyBox">
-          <div class="images-synopsis ellipsis">
-            <div class="ellipsis">{{(item.Download || {}).url}}</div>
-            <div>Download</div>
-          </div>
-          <div class="copyBox-hover">
-            <a-button @click="copyText((item.Download || {}).url)">
-              Copy
-            </a-button>
+        <div v-if="state.list.length == 0 && !state.loading">
+          <div class="nomore">
+            <img class="images-img" src="@/assets/svg/nomore.svg" />
+            <p>No More</p>
           </div>
         </div>
-      </div>
-      <div v-if="state.list.length == 0 && !state.loading">
-        <div class="nomore">
-          <img class="images-img" src="@/assets/svg/nomore.svg" />
-          <p>No More</p>
+        <div class="spin-box">
+          <a-spin v-if="state.loading" size='large'></a-spin>
         </div>
-      </div>
-      <div class="spin-box">
-        <a-spin v-if="state.loading" size='large'></a-spin>
       </div>
     </div>
   </main>
@@ -59,13 +68,14 @@
 import { onMounted, onBeforeUnmount, reactive, ref, nextTick } from 'vue'
 import { getImagesTag } from '@/api/request'
 import { copyToClipboard, transPower } from '@/utils/index'
-import { Spin as aSpin, message, Button as aButton } from 'ant-design-vue'
+import { Spin as aSpin, message, Divider as aDivider, Tooltip as aTooltip } from 'ant-design-vue'
 import { useRoute } from 'vue-router'
 
 export default {
   components: {
     aSpin,
-    aButton
+    aDivider,
+    aTooltip
   },
   setup () {
     const state: any = reactive({
@@ -141,25 +151,50 @@ export default {
 
 <style scoped lang="less">
 .main-content {
-  width: 1260px;
-  margin: 0 auto;
   box-sizing: border-box;
   height: calc(100vh - 64px);
-  padding-top: 30px;
-  .images-names{
+  .main-header{
     background-color: #ffffff;
-    padding: 20px 30px;
-    box-shadow: 0px 3px 30px rgba(85, 128, 246, 0.14);
-    font-size: 16px;
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    grid-column-gap: 20px;
-    align-items: center;
-    .images-img {
-      height: 80px;
-      width: 80px;
-      object-fit: contain;
+    &:nth-of-type(1){
+      border-bottom: 1px #E2E4E6 solid;
     }
+    &>div{
+      width: 1260px;
+      margin: 0 auto;
+    }
+    .main-header-breadcrumb{
+      height: 48px;
+      padding: 16px 0;
+      font-size: 14px;
+      .ant-divider{
+        background: #E2E4E6;
+        margin: 0 16px;
+      }
+      a{
+        color: #707A81;
+      }
+      a:nth-last-of-type(1){
+        color: #00A5C9;
+      }
+    }
+    .images-names{
+      padding: 48px 0;
+      font-size: 16px;
+      color: #252C33;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      grid-column-gap: 20px;
+      align-items: center;
+      .images-img {
+        height: 80px;
+        width: 80px;
+        object-fit: contain;
+      }
+    }
+  }
+  .main-content-list{
+    width: 1260px;
+    margin: 0 auto;
   }
   .overview {
     color: #707a81;
@@ -182,59 +217,31 @@ export default {
       box-sizing: border-box;
       padding: 24px 32px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr) 200px;
+      grid-template-columns: 150px 1fr 150px 200px;
       grid-column-gap: 10px;
       align-items: center;
-      color: #252c33;
+      color: #252C33;
       margin-bottom: 10px;
       border: 1px solid #E2E4E6;
       transition: 200ms all linear;
       &:hover{
         border: 1px solid transparent;
       }
-      &>.images-synopsis:nth-of-type(1){
-        text-align: left;
-      }
       .images-synopsis {
-        text-align: right;
+        text-align: left;
         & > div:nth-of-type(1) {
           font-size: 18px;
           line-height: 24px;
+          margin-bottom: 5px;
         }
         & > div:nth-of-type(2) {
           font-size: 14px;
           line-height: 21px;
-          color: #5d676d;
+          color: #707A81;
         }
       }
-      .copyBox{
-        position: relative;
-        text-align: center;
-        padding: 0 20px;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        .images-synopsis{
-          text-align: center;
-        }
-        &:hover{
-          .copyBox-hover{
-            opacity: 1;
-          }
-        }
-        .copyBox-hover{
-          opacity: 0;
-          transition: 200ms all linear;
-          background-color: rgba(255,255,255,0.4);
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
+      .copy-box{
+        cursor: pointer;
       }
     }
   }
@@ -247,15 +254,28 @@ export default {
 }
   @media screen and (max-width: 768px) {
     .main-content {
-      width: 100vw;
       padding-top: 0;
+      .main-content-list{
+        width: 100vw;
+      }
+      .main-header{
+        &>div{
+          width: 100vw;
+        }
+      .main-header-breadcrumb{
+        padding: 16px 10px;
+      }
+        .images-names{
+          padding: 16px 0;
+        }
+      }
       .overview {
         padding-left: 10px;
       }
       .list{
         .item{
           padding: 10px 20px;
-          grid-template-columns: 75px 300px;
+          grid-template-columns: 75px 260px;
           &>div:nth-of-type(3),&>div:nth-of-type(4){
             display: none;
           }
