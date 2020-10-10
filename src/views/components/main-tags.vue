@@ -27,7 +27,7 @@
             <div class="ellipsis">{{item.tagName}}</div>
             <div>Tag</div>
           </div>
-          <a-tooltip overlayClassName='copy-txt' placement='top' :destroyTooltipOnHide='true'>
+          <a-tooltip :align='{offset: [100, -30]}' overlayClassName='copy-txt' placement='bottomLeft' :destroyTooltipOnHide='true'>
             <template v-slot:title>
               <span>copy</span>
             </template>
@@ -40,7 +40,7 @@
             <div>{{transPower(item.size)}}</div>
             <div>Size</div>
           </div>
-          <a-tooltip overlayClassName='copy-txt' placement='top' :destroyTooltipOnHide='true'>
+          <a-tooltip :align='{offset: [30, -30]}' overlayClassName='copy-txt' placement='bottomLeft' :destroyTooltipOnHide='true'>
             <template v-slot:title>
               <span>copy</span>
             </template>
