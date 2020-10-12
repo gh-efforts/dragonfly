@@ -284,3 +284,9 @@ export default {
     }
   }
 </style>
+
+<style lang="less">
+  .copy-txt{
+    pointer-events:none;
+  }
+</style>
