@@ -8,6 +8,9 @@ Dragonfly is a distributed docker registry based on Filecoin and IPFS network. T
 - **Effecient:** low latency and low cost;
 - **Specification:** fully comply with the Docker specification;
 
+## Url
+[https://dragonfly.diancun.net/](https://dragonfly.diancun.net/)
+
 ## Build Setup
 
 ```
@@ -17,7 +20,7 @@ echo 'VUE_APP_API_URL=url' > .env
 npm install
 
 # serve with hot reload at localhost:8080
-npm serve
+npm run serve
 
 # build for production with minification
 npm run build
