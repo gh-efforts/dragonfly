@@ -4,9 +4,10 @@
     <div class="list" ref="domList">
       <router-link class="item" v-for="(item,key) of state.list" :key="key" :to="{name: 'tags', params: {id: item.id}}">
         <div>
-          <img class="images-img" src="@/assets/docker.png" />
+          <img class="images-img" :src="item.logo_url || require('@/assets/docker.png')" />
         </div>
         <div class="ellipsis images-title">{{ item.imageName }}</div>
+        <div class="ellipsis images-title">{{ item.short_description }}</div>
       </router-link>
       <div v-if="state.list.length == 0 && !state.loading">
         <div class="nomore">
@@ -138,7 +139,7 @@ export default {
       box-sizing: border-box;
       padding: 24px 32px;
       display: grid;
-      grid-template-columns: 95px 1fr;
+      grid-template-columns: 95px 200px 1fr;
       grid-column-gap: 10px;
       align-items: center;
       color: #252c33;
@@ -175,6 +176,10 @@ export default {
       .list{
         .item{
           padding: 10px 20px;
+          grid-template-columns: 95px 1fr;
+          &>div:nth-last-of-type(1){
+            display: none;
+          }
         }
       }
     }

@@ -12,9 +12,12 @@
     <div class="main-header">
       <div>
         <div class="images-names">
-          <img class="images-img" src="@/assets/docker.png" />
+          <img class="images-img" :src="state.logo_url || require('@/assets/docker.png')" />
           <div class="ellipsis">
           {{state.imageName}}
+          </div>
+          <div class="ellipsis">
+          {{state.short_description}}
           </div>
         </div>
       </div>
@@ -31,24 +34,15 @@
             <template v-slot:title>
               <span>copy</span>
             </template>
-            <div class="images-synopsis ellipsis copy-box" @click="copyText((item.Download || {}).cid)">
-              <div class="ellipsis">{{(item.Download || {}).cid}}</div>
+            <div class="images-synopsis ellipsis copy-box" @click="copyText( (item.CarInfo || {}).data_id || (item.CarInfo || {}).pow_cid )">
+              <div class="ellipsis">{{ (item.CarInfo || {}).data_id || (item.CarInfo || {}).pow_cid }}</div>
               <div>CID</div>
             </div>
           </a-tooltip>
           <div class="images-synopsis">
-            <div>{{transPower(item.size)}}</div>
+            <div>{{transPower( item.size || (item.CarInfo || {}).size )}}</div>
             <div>Size</div>
           </div>
-          <a-tooltip :align='{offset: [30, -30]}' overlayClassName='copy-txt' placement='bottomLeft' :destroyTooltipOnHide='true'>
-            <template v-slot:title>
-              <span>copy</span>
-            </template>
-            <div class="images-synopsis ellipsis copy-box" @click="copyText((item.Download || {}).url)">
-              <div class="ellipsis">{{(item.Download || {}).url}}</div>
-              <div>Pull command</div>
-            </div>
-          </a-tooltip>
         </div>
         <div v-if="state.list.length == 0 && !state.loading">
           <div class="nomore">
@@ -80,6 +74,8 @@ export default {
   setup () {
     const state: any = reactive({
       imageName: '',
+      logo_url: '',
+      short_description: '',
       list: [],
       total: 0,
       limit: 10,
@@ -98,10 +94,13 @@ export default {
         id: route.params.id
       }
       getImagesTag(params).then(async (res: any) => {
-        const { imageinfo, tag } = res
+        const { imageinfo, tag } = res.data
+        console.log(res)
         state.imageName = imageinfo.imageName
-        state.list = [...state.list, ...tag.rows]
-        state.total = tag.count
+        state.logo_url = imageinfo.logo_url
+        state.short_description = imageinfo.short_description
+        state.list = [...state.list, ...tag]
+        state.total = res.count
         state.loading = false
         await nextTick()
         if (imageList.value.scrollHeight === imageList.value.clientHeight) {
@@ -182,7 +181,7 @@ export default {
       font-size: 16px;
       color: #252C33;
       display: grid;
-      grid-template-columns: 80px 1fr;
+      grid-template-columns: 80px 200px 1fr;
       grid-column-gap: 20px;
       align-items: center;
       .images-img {
@@ -205,7 +204,7 @@ export default {
     box-sizing: border-box;
   }
   .list {
-    height: calc(100% - 216px);
+    height: calc(100vh - 350px);
     overflow-x: hidden;
     overflow-y: auto;
     .item {
@@ -217,7 +216,7 @@ export default {
       box-sizing: border-box;
       padding: 24px 32px;
       display: grid;
-      grid-template-columns: 150px 1fr 150px 200px;
+      grid-template-columns: 150px 1fr 200px;
       grid-column-gap: 10px;
       align-items: center;
       color: #252C33;
@@ -267,16 +266,20 @@ export default {
       }
         .images-names{
           padding: 16px 0;
+          &>div:nth-last-of-type(1){
+            display: none;
+          }
         }
       }
       .overview {
         padding-left: 10px;
       }
       .list{
+        height: calc(100vh - 350px + 64px);
         .item{
           padding: 10px 20px;
           grid-template-columns: 75px 260px;
-          &>div:nth-of-type(3),&>div:nth-of-type(4){
+          &>div:nth-of-type(3){
             display: none;
           }
         }
