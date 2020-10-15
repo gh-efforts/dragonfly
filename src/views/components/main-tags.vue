@@ -95,7 +95,6 @@ export default {
       }
       getImagesTag(params).then(async (res: any) => {
         const { imageinfo, tag } = res.data
-        console.log(res)
         state.imageName = imageinfo.imageName
         state.logo_url = imageinfo.logo_url
         state.short_description = imageinfo.short_description
