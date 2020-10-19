@@ -30,16 +30,31 @@
             <div class="ellipsis">{{item.tagName}}</div>
             <div>Tag</div>
           </div>
-          <a-tooltip :align='{offset: [100, -30]}' overlayClassName='copy-txt' placement='bottomLeft' :destroyTooltipOnHide='true'>
-            <template v-slot:title>
-              <span>copy</span>
-            </template>
-            <div class="images-synopsis ellipsis copy-box" @click="copyText( (item.CarInfo || {}).data_id || (item.CarInfo || {}).pow_cid )">
-              <div class="ellipsis">{{ (item.CarInfo || {}).data_id || (item.CarInfo || {}).pow_cid }}</div>
-              <div>CID</div>
-            </div>
-          </a-tooltip>
-          <div class="images-synopsis">
+          <template v-if="(item.CarInfo || {}).pow_cid">
+            <a-tooltip :align='{offset: [100, -30]}' overlayClassName='copy-txt' placement='bottomLeft' :destroyTooltipOnHide='true'>
+              <template v-slot:title>
+                <span>copy</span>
+              </template>
+              <div class="images-synopsis ellipsis copy-box" @click="copyText( (item.CarInfo || {}).pow_cid )">
+                <div class="ellipsis">{{ (item.CarInfo || {}).pow_cid }}</div>
+                <div>CID</div>
+              </div>
+            </a-tooltip>
+          </template>
+          <div class="no-cid" v-else></div>
+          <template v-if="(item.CarInfo || {}).data_id">
+            <a-tooltip :align='{offset: [100, -30]}' overlayClassName='copy-txt' placement='bottomLeft' :destroyTooltipOnHide='true'>
+              <template v-slot:title>
+                <span>copy</span>
+              </template>
+              <div class="images-synopsis ellipsis copy-box" @click="copyText( (item.CarInfo || {}).data_id )">
+                <div class="ellipsis">{{ (item.CarInfo || {}).data_id }}</div>
+                <div>Data CID</div>
+              </div>
+            </a-tooltip>
+          </template>
+          <div class="no-cid" v-else></div>
+          <div class="images-synopsis size-txt">
             <div>{{transPower( item.size || (item.CarInfo || {}).size )}}</div>
             <div>Size</div>
           </div>
@@ -220,7 +235,7 @@ export default {
       box-sizing: border-box;
       padding: 24px 32px;
       display: grid;
-      grid-template-columns: 150px 1fr 200px;
+      grid-template-columns: 150px 1fr 1fr 200px;
       grid-column-gap: 10px;
       align-items: center;
       color: #252C33;
@@ -242,6 +257,9 @@ export default {
           line-height: 21px;
           color: #707A81;
         }
+      }
+      .size-txt{
+        text-indent: 30px;
       }
       .copy-box{
         cursor: pointer;
@@ -283,7 +301,7 @@ export default {
         .item{
           padding: 10px 20px;
           grid-template-columns: 75px 260px;
-          &>div:nth-of-type(3){
+          &>div:nth-of-type(4),&>.no-cid,&>.copy-box:nth-of-type(2){
             display: none;
           }
         }
