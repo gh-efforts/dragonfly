@@ -40,6 +40,9 @@ export const copyToClipboard = (textToCopy: string): Promise<void> => {
 }
 
 export const transPower = (data: number) => {
+  if (!data) {
+    data = 0
+  }
   let size = ''
   if (data < 1 * 1024) {
     size = data.toFixed(2) + ' B'

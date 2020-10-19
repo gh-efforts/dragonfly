@@ -65,10 +65,12 @@ export default {
         state.total = res.count
         state.loading = false
         await nextTick()
-        if (domList.value.scrollHeight === domList.value.clientHeight) {
-          // 内容未满，尝试触发下拉
-          // eslint-disable-next-line @typescript-eslint/no-use-before-define
-          handleScroll()
+        if (domList.value) {
+          if (domList.value.scrollHeight === domList.value.clientHeight) {
+            // 内容未满，尝试触发下拉
+            // eslint-disable-next-line @typescript-eslint/no-use-before-define
+            handleScroll()
+          }
         }
       })
     }
