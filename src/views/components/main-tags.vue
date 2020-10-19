@@ -80,7 +80,8 @@ export default {
       total: 0,
       limit: 10,
       page: 1,
-      loading: false
+      loading: false,
+      noMore: false
     })
     const imageList = ref()
     const route = useRoute()
@@ -95,6 +96,9 @@ export default {
       }
       getImagesTag(params).then(async (res: any) => {
         const { imageinfo, tag } = res.data
+        if (tag.length < limit) {
+          state.noMore = true
+        }
         state.imageName = imageinfo.imageName
         state.logo_url = imageinfo.logo_url
         state.short_description = imageinfo.short_description
@@ -116,7 +120,8 @@ export default {
 
     const handleScroll = () => {
       if (imageList.value.scrollTop + imageList.value.clientHeight >= imageList.value.scrollHeight - 10) {
-        if (state.list.length >= state.total || state.loading) {
+        const curTotal = state.page * state.limit
+        if (state.noMore || curTotal >= state.total || state.loading) {
           return false
         }
         state.page++

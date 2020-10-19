@@ -43,7 +43,8 @@ export default {
       total: 0,
       limit: 10,
       page: 1,
-      loading: true
+      loading: true,
+      noMore: false
     })
     const domList = ref()
 
@@ -57,6 +58,9 @@ export default {
         searchTxt: searchTxt.trim()
       }
       getList(params).then(async (res: any) => {
+        if ((res.list || res.rows).length < limit) {
+          state.noMore = true
+        }
         state.list = [...state.list, ...(res.list || res.rows)]
         state.total = res.count
         state.loading = false
@@ -90,7 +94,8 @@ export default {
 
     const handleScroll = () => {
       if (domList.value.scrollTop + domList.value.clientHeight >= domList.value.scrollHeight - 10) {
-        if (state.list.length >= state.total || state.loading) {
+        const curTotal = state.page * state.limit
+        if (state.noMore || curTotal >= state.total || state.loading) {
           return false
         }
         state.page++
