@@ -1,10 +1,21 @@
 <template>
   <main class="main-content">
-    <div class="overview">{{state.list.length > 0 ? 1 : 0}} - {{state.list.length}} of {{state.total}} available images.</div>
+    <div class="overview">
+      {{ state.list.length > 0 ? 1 : 0 }} - {{ state.list.length }} of
+      {{ state.total }} available images.
+    </div>
     <div class="list" ref="domList">
-      <router-link class="item" v-for="(item,key) of state.list" :key="key" :to="{name: 'tags', params: {id: item.id}}">
+      <router-link
+        class="item"
+        v-for="(item, key) of state.list"
+        :key="key"
+        :to="{ name: 'tags', params: { id: item.id } }"
+      >
         <div>
-          <img class="images-img" :src="item.logo_url || require('@/assets/docker.png')" />
+          <img
+            class="images-img"
+            :src="item.logo_url || require('@/assets/docker.png')"
+          />
         </div>
         <div class="ellipsis images-title">{{ item.imageName }}</div>
         <div class="ellipsis images-title">{{ item.short_description }}</div>
@@ -16,7 +27,7 @@
         </div>
       </div>
       <div class="spin-box">
-        <a-spin v-if="state.loading" size='large'></a-spin>
+        <a-spin v-if="state.loading" size="large"></a-spin>
       </div>
     </div>
   </main>
@@ -30,12 +41,12 @@ import { useRoute } from 'vue-router'
 
 export default {
   components: {
-    aSpin
+    aSpin,
   },
   props: {
-    searchTxt: String
+    searchTxt: String,
   },
-  setup (props: any) {
+  setup(props: any) {
     const route = useRoute()
 
     const state: any = reactive({
@@ -44,7 +55,7 @@ export default {
       limit: 10,
       page: 1,
       loading: true,
-      noMore: false
+      noMore: false,
     })
     const domList = ref()
 
@@ -55,7 +66,7 @@ export default {
       const params = {
         limit,
         page,
-        searchTxt: searchTxt.trim()
+        searchTxt: searchTxt.trim(),
       }
       getList(params).then(async (res: any) => {
         if ((res.list || res.rows).length < limit) {
@@ -95,7 +106,10 @@ export default {
     )
 
     const handleScroll = () => {
-      if (domList.value.scrollTop + domList.value.clientHeight >= domList.value.scrollHeight - 10) {
+      if (
+        domList.value.scrollTop + domList.value.clientHeight >=
+        domList.value.scrollHeight - 10
+      ) {
         const curTotal = state.page * state.limit
         if (state.noMore || curTotal >= state.total || state.loading) {
           return false
@@ -113,9 +127,9 @@ export default {
 
     return {
       state,
-      domList
+      domList,
     }
-  }
+  },
 }
 </script>
 
@@ -151,10 +165,10 @@ export default {
       align-items: center;
       color: #252c33;
       margin-bottom: 10px;
-      border: 1px solid #E2E4E6;
-      cursor: pointer;;
+      border: 1px solid #e2e4e6;
+      cursor: pointer;
       transition: 200ms all linear;
-      &:hover{
+      &:hover {
         border: 1px solid transparent;
       }
       .images-img {
@@ -167,28 +181,28 @@ export default {
       }
     }
   }
-  .spin-box{
+  .spin-box {
     height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 }
-  @media screen and (max-width: 768px) {
-    .main-content {
-      width: 100vw;
-      .overview {
-        padding-left: 10px;
-      }
-      .list{
-        .item{
-          padding: 10px 20px;
-          grid-template-columns: 95px 1fr;
-          &>div:nth-last-of-type(1){
-            display: none;
-          }
+@media screen and (max-width: 768px) {
+  .main-content {
+    width: 100vw;
+    .overview {
+      padding-left: 10px;
+    }
+    .list {
+      .item {
+        padding: 10px 20px;
+        grid-template-columns: 95px 1fr;
+        & > div:nth-last-of-type(1) {
+          display: none;
         }
       }
     }
   }
+}
 </style>

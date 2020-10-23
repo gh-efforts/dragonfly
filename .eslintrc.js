@@ -1,16 +1,16 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
   },
   extends: [
     'plugin:vue/vue3-essential',
     '@vue/standard',
     '@vue/typescript/recommended',
-    'eslint:recommended'
+    'eslint:recommended',
   ],
   parserOptions: {
-    ecmaVersion: 2020
+    ecmaVersion: 2020,
   },
   rules: {
     'prefer-promise-reject-errors': ['error', { allowEmptyReject: true }],
@@ -28,6 +28,9 @@ module.exports = {
     'no-inline-comments': 0,
     'no-unused-vars': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     '@typescript-eslint/no-explicit-any': 0,
-    '@typescript-eslint/ban-ts-ignore': 'off'
-  }
+    '@typescript-eslint/ban-ts-ignore': 0,
+    'space-before-function-paren': 0,
+    'comma-dangle': 0,
+    'vue/custom-event-name-casing': 0,
+  },
 }
