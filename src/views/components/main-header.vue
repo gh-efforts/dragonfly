@@ -19,7 +19,7 @@
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                href="https://github.com/diancun/dragonfly-cli/releases/download/v1.0.0/darwin-amd64-dragonfly-release.zip"
+                href="https://github.com/diancun/dragonfly-cli/releases/download/v1.0.0/linux-amd64-dragonfly-release.zip"
               >
                 Linux version
               </a>
@@ -28,7 +28,7 @@
               <a
                 target="_blank"
                 rel="noopener noreferrer"
-                href="https://github.com/diancun/dragonfly-cli/releases/download/v1.0.0/linux-amd64-dragonfly-release.zip"
+                href="https://github.com/diancun/dragonfly-cli/releases/download/v1.0.0/darwin-amd64-dragonfly-release.zip"
               >
                 Mac version
               </a>
